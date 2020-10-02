@@ -1,0 +1,19 @@
+---
+  - hosts: all
+    gather_facts: false
+
+    vars_prompt:
+    - name: username
+      prompt: "Username"
+    - name: password
+      prompt: "Password"
+
+    vars:
+      ansible_user: "{{ username }}"
+      ansible_password: "{{ password }}"
+      ansible_winrm_server_cert_validation: ignore
+      ansible_connection: winrm
+
+    tasks:
+     - name: ping windows
+       win_ping:
